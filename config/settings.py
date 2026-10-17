@@ -1,10 +1,15 @@
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Keep your existing secret key here.
-SECRET_KEY = "REPLACE_WITH_YOUR_EXISTING_SECRET_KEY"
+load_dotenv(BASE_DIR / ".env")
+
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
+if not SECRET_KEY:
+    raise RuntimeError("DJANGO_SECRET_KEY is missing from .env")
 
 DEBUG = True
 
@@ -22,6 +27,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "users",
 ]
+
 
 
 MIDDLEWARE = [
@@ -111,3 +117,8 @@ STATIC_URL = "static/"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
