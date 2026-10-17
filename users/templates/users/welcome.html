@@ -1,0 +1,32 @@
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | RegApp</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<main class="container">
+    <section class="card success-card">
+        <div class="success-icon">✓</div>
+        <p class="eyebrow">LOGIN SUCCESSFUL</p>
+        <h1>Welcome, {{ user.name }}!</h1>
+        <p class="subtitle">You have logged in successfully.</p>
+
+        <div class="user-details">
+            <span>Email Address</span>
+            <strong>{{ user.email }}</strong>
+        </div>
+
+        <div class="actions">
+            <a class="btn primary" href="{% url 'home' %}">Back to Home</a>
+            <a class="btn secondary" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
+```

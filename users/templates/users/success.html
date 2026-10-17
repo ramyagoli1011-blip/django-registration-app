@@ -1,0 +1,30 @@
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful | RegApp</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<main class="container">
+    <section class="card success-card">
+        <div class="success-icon">✓</div>
+        <p class="eyebrow">ACCOUNT CREATED</p>
+        <h1>You're all set!</h1>
+        <p class="subtitle">
+            Your registration was successful. You can now log in
+            using your email address and password.
+        </p>
+
+        <div class="actions">
+            <a class="btn primary" href="{% url 'login' %}">Go to Login</a>
+            <a class="btn secondary" href="{% url 'home' %}">Back to Home</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
+```

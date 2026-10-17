@@ -1,0 +1,52 @@
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | RegApp</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<main class="container">
+    <section class="card form-card">
+        <a class="back-link" href="{% url 'home' %}">← Back to Home</a>
+
+        <div class="logo">R</div>
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Log in to your account.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <label for="email">Email Address</label>
+            <input id="email" type="email" name="email"
+                   placeholder="Enter your registered email"
+                   autocomplete="email" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password"
+                   placeholder="Enter your password"
+                   autocomplete="current-password" required>
+
+            <button class="btn primary full-width" type="submit">
+                Login
+            </button>
+        </form>
+
+        <p class="switch-text">
+            Don't have an account?
+            <a href="{% url 'register' %}">Create Account</a>
+        </p>
+    </section>
+</main>
+</body>
+</html>
+```

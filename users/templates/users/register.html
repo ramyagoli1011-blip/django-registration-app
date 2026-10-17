@@ -1,0 +1,178 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | RegApp</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <style>
+        .password-field {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .password-field input {
+            width: 100%;
+            box-sizing: border-box;
+            padding-right: 48px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .message {
+            padding: 10px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            background: #fce8e6;
+            color: #b42318;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-card">
+
+            <h1>Create Account</h1>
+            <p class="subtitle">Register to get started</p>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    value="{{ request.POST.name|default:'' }}"
+                    required
+                >
+
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value="{{ request.POST.email|default:'' }}"
+                    required
+                >
+
+                 <label for="phone">Phone Number</label>
+            <div class="phone-row">
+                <select name="country" aria-label="Country code">
+                    <option value="+91">India (+91)</option>
+                    <option value="+1">USA/Canada (+1)</option>
+                    <option value="+44">UK (+44)</option>
+                    <option value="+61">Australia (+61)</option>
+                    <option value="+971">UAE (+971)</option>
+                </select>
+
+                <input id="phone" type="tel" name="phone"
+                       placeholder="10 digit number"
+                       pattern="[0-9]{10}" maxlength="10"
+                       inputmode="numeric" autocomplete="tel-national" required>
+            </div>
+            
+                <label for="password">Password</label>
+                <div class="password-field">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        onclick="togglePassword('password', this)"
+                        aria-label="Show password"
+                        title="Show password"
+                    >👁️</button>
+                </div>
+
+                <small>
+                    Use at least 8 characters with uppercase, lowercase,
+                    a number and a special character.
+                </small>
+
+                <label for="confirm_password">Confirm Password</label>
+                <div class="password-field">
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        onclick="togglePassword('confirm_password', this)"
+                        aria-label="Show confirm password"
+                        title="Show password"
+                    >👁️</button>
+                </div>
+
+                <button type="submit" class="btn">Register</button>
+            </form>
+
+            <p class="form-footer">
+                Already have an account?
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+
+            <p class="form-footer">
+                <a href="{% url 'home' %}">Back to Home</a>
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+
+            if (input.type === "password") {
+                input.type = "text";
+                button.textContent = "🙈";
+                button.setAttribute("aria-label", "Hide password");
+                button.setAttribute("title", "Hide password");
+            } else {
+                input.type = "password";
+                button.textContent = "👁️";
+                button.setAttribute("aria-label", "Show password");
+                button.setAttribute("title", "Show password");
+            }
+        }
+    </script>
+
+</body>
+</html>

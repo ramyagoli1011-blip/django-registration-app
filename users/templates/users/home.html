@@ -1,0 +1,38 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | RegApp</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <main class="container">
+        <section class="card home-card">
+            <div class="logo">R</div>
+
+            <p class="eyebrow">WELCOME TO REGAPP</p>
+
+            <h1>Start your journey.</h1>
+
+            <p class="subtitle">
+                Create your account and join us today.
+            </p>
+
+            <div class="actions">
+                <a class="btn primary" href="{% url 'login' %}">
+                    Login
+                </a>
+
+                <a class="btn secondary" href="{% url 'register' %}">
+                    Create Account
+                </a>
+            </div>
+
+            <p class="footer-text">Simple. Secure. Easy.</p>
+        </section>
+    </main>
+</body>
+</html>
